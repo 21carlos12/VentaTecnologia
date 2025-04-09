@@ -27,3 +27,55 @@ def main():
             for producto in productos:
                 print(producto)
         
+        elif opcion == "2":
+            print("\n--- APLICAR DESCUENTO A SMARTPHONE ---")
+            smartphones = [p for p in productos if isinstance(p, Smartphone)]
+            for i, phone in enumerate(smartphones, 1):
+                print(f"{i}. {phone}")
+            
+            try:
+                seleccion = int(input("Seleccione un smartphone: ")) - 1
+                descuento = float(input("Ingrese el porcentaje de descuento: "))
+                smartphones[seleccion].aplicar_descuento(descuento)
+                print(f"Nuevo precio: {smartphones[seleccion].get_precio()}")
+            except (ValueError, IndexError):
+                print("Selección inválida")
+        
+        elif opcion == "3":
+            print("\n--- ACTUALIZAR COMPUTADORA ---")
+            computadoras = [p for p in productos if isinstance(p, Computadora)]
+            for i, comp in enumerate(computadoras, 1):
+                print(f"{i}. {comp}")
+            
+            try:
+                seleccion = int(input("Seleccione una computadora: ")) - 1
+                nuevo_procesador = input("Ingrese el nuevo procesador: ")
+                computadoras[seleccion].actualizar_especificacion(nuevo_procesador)
+                print("¡Especificación actualizada!")
+            except (ValueError, IndexError):
+                print("Selección inválida")
+        
+        elif opcion == "4":
+            print("\n--- VENDER PRODUCTO ---")
+            for i, producto in enumerate(productos, 1):
+                print(f"{i}. {producto}")
+            
+            try:
+                seleccion = int(input("Seleccione un producto: ")) - 1
+                cantidad = int(input("Ingrese la cantidad a vender: "))
+                if productos[seleccion].vender(cantidad):
+                    print("¡Venta realizada con éxito!")
+                else:
+                    print("No hay suficiente stock")
+            except (ValueError, IndexError):
+                print("Selección inválida")
+        
+        elif opcion == "5":
+            print("Saliendo del sistema...")
+            break
+        
+        else:
+            print("Opción no válida. Intente nuevamente.")
+
+if __name__ == "_main_":
+    main()
